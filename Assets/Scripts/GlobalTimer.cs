@@ -44,10 +44,7 @@ public class GlobalTimer : MonoBehaviour
 
     public void AddTime()
     {
-        if (combo < 1.0f)
-        {
-            combo = 1.0f;
-        }
+        if (combo < 1.0f) combo = 1.0f;
 
         combo += comboIncrease;
         currentTime *= combo;
@@ -56,10 +53,8 @@ public class GlobalTimer : MonoBehaviour
 
     public void RemoveTime()
     {
-        if (combo > 1.0f)
-        {
-            combo = 1.0f;
-        }
+        if (combo > 1.0f) combo = 1.0f;
+
         combo -= comboDecrease;
         currentTime *= combo;
         StartCoroutine(scaleTimer());
