@@ -11,6 +11,11 @@ public class GlobalTimer : MonoBehaviour
 
     public Text timerText;
 
+    [SerializeField]
+    float combo = 1.0f;
+    float comboIncrease = 0.02f;
+    float comboDecrease = 0.05f;
+
     private void Start()
     {
         currentTime = startingTime;
@@ -37,13 +42,33 @@ public class GlobalTimer : MonoBehaviour
 
     }
 
-    public void AddTime(float time)
+    public void AddTime()
     {
-        currentTime += time;
+        if (combo < 1.0f)
+        {
+            combo = 1.0f;
+        }
+
+        combo += comboIncrease;
+        currentTime *= combo;
+        StartCoroutine(scaleTimer());
     }
 
-    public void RemoveTime(float time)
+    public void RemoveTime()
     {
-        currentTime -= time;
+        if (combo > 1.0f)
+        {
+            combo = 1.0f;
+        }
+        combo -= comboDecrease;
+        currentTime *= combo;
+        StartCoroutine(scaleTimer());
+    }
+
+    private IEnumerator scaleTimer()
+    {
+        timerText.fontSize += 10;
+        yield return new WaitForSeconds(0.2f);
+        timerText.fontSize -= 10;
     }
 }
