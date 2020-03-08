@@ -2,45 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CustomerAgent))]
 public class Customer : MonoBehaviour
 {
 
-    [SerializeField]
-    float customerWaitTime;
-    float waitTimeLeft;
-    float minWaitTime = 15;
-    float maxWaitTime = 25;
-    bool waitingForFood = false;
-    bool hasBeenFed = false;
-
-    public Transform spawnPoint;
-    public Transform counterPoint;
+    [SerializeField] float customerWaitTime, waitTimeLeft, minWaitTime = 15, maxWaitTime = 25;
+    public bool waitingForFood = false, hasBeenFed = false, reachedCounter = false;
 
     private CustomerAgent ca;
     private GlobalTimer timer;
 
     private void Start()
     {
+        timer = GameObject.FindGameObjectWithTag("GameController").GetComponent<GlobalTimer>();
+        ca = this.GetComponent<CustomerAgent>();
+
         customerWaitTime = Random.Range(minWaitTime, maxWaitTime);
         waitTimeLeft = customerWaitTime;
     }
 
     private void Update()
     {
-        if (waitingForFood == true)
+        if (waitingForFood)
         {
             waitTimeLeft -= 1 * Time.deltaTime;
 
             if (waitTimeLeft <= 0)
             {
-                timer.RemoveTime();
-                StartCoroutine(ca.Leave());
+                if (!hasBeenFed)
+                {
+                    timer.RemoveTime();
+                    ca.Leave();
+                    ca.agent.isStopped = false;
+                    waitingForFood = false;
+                }
             }
 
-            if (hasBeenFed == true)
+            if (hasBeenFed)
             {
                 timer.AddTime();
-                StartCoroutine(ca.Leave());
+                ca.agent.isStopped = false;
+                ca.Leave();
             }
         }
     }
