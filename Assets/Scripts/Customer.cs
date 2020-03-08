@@ -11,9 +11,13 @@ public class Customer : MonoBehaviour
     float minWaitTime = 15;
     float maxWaitTime = 25;
     bool waitingForFood = false;
+    bool hasBeenFed = false;
 
     public Transform spawnPoint;
     public Transform counterPoint;
+
+    private CustomerAgent ca;
+    private GlobalTimer timer;
 
     private void Start()
     {
@@ -29,7 +33,14 @@ public class Customer : MonoBehaviour
 
             if (waitTimeLeft <= 0)
             {
-                // Customer walks away
+                timer.RemoveTime();
+                StartCoroutine(ca.Leave());
+            }
+
+            if (hasBeenFed == true)
+            {
+                timer.AddTime();
+                StartCoroutine(ca.Leave());
             }
         }
     }
