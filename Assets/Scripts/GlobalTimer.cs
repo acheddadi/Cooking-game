@@ -8,6 +8,7 @@ public class GlobalTimer : MonoBehaviour
 
     public float startingTime = 60;
     public float currentTime = 0;
+    public bool runningTimer = true;
 
     public Text timerText;
 
@@ -23,20 +24,28 @@ public class GlobalTimer : MonoBehaviour
 
     private void Update()
     {
-        currentTime -= 1 * Time.deltaTime;
-        timerText.text = currentTime.ToString("0");
-
-        if (currentTime > 10f)
+        if (runningTimer)
         {
-            timerText.color = Color.white;
-        }
-        else {
-            timerText.color = Color.red;
+            currentTime -= 1 * Time.deltaTime;
+            timerText.text = currentTime.ToString("0");
 
-            if (currentTime <= 0f)
+            if (currentTime > 150)
+                currentTime = 150;
+
+            if (currentTime > 10f)
             {
-                // Game Over
-                Debug.Log("Game Over");
+                timerText.color = Color.white;
+            }
+            else
+            {
+                timerText.color = Color.red;
+
+                if (currentTime <= 0f)
+                {
+                    // Game Over
+                    Debug.Log("Game Over");
+                    runningTimer = false;
+                }
             }
         }
 
