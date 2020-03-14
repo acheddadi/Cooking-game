@@ -26,6 +26,7 @@ public class GrapplingHook : MonoBehaviour
         if (fired)
         {
             LineRenderer rope = hook.GetComponent<LineRenderer>();
+            rope.positionCount = 2;
             rope.SetPosition(0, hookHolder.transform.position);
             rope.SetPosition(1, hook.transform.position);
         }
@@ -43,7 +44,10 @@ public class GrapplingHook : MonoBehaviour
 
     public void ReturnHook()
     {
-        hook.transform.position = hookHolder.transform.position;
+        hook.transform.position = Vector3.MoveTowards(hook.transform.position, hookHolder.transform.position, hookTravelSpeed);
         fired = false;
+
+        LineRenderer rope = hook.GetComponent<LineRenderer>();
+        rope.positionCount = 0;
     }
 }

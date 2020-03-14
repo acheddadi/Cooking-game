@@ -18,7 +18,7 @@ public class HookDetector : MonoBehaviour
             if (other.tag == "Food")
             {
                 other.transform.position =
-                    Vector3.MoveTowards(other.transform.position, hookHolder.transform.position, player.GetComponent<GrapplingHook>().hookTravelSpeed);
+                    Vector3.MoveTowards(other.transform.position, hookHolder.transform.position, 15f);
 
                 hooked = true;
             }
