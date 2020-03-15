@@ -30,8 +30,20 @@ public class PathController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W)) SelectNextWaypoint(FORWARD);
-        if (Input.GetKeyDown(KeyCode.S)) SelectNextWaypoint(REVERSE);
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Vector3 pathDirection = path.GetDirection(currentTimeOnPath);
+            Vector3 directionToCheck = Vector3.Project(Camera.main.transform.forward, path.GetDirection(currentTimeOnPath));
+            if (Vector3.Angle(pathDirection, directionToCheck) != 0.0f) SelectNextWaypoint(REVERSE);
+            else SelectNextWaypoint(FORWARD);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Vector3 pathDirection = path.GetDirection(currentTimeOnPath);
+            Vector3 directionToCheck = Vector3.Project(Camera.main.transform.forward, path.GetDirection(currentTimeOnPath));
+            if (Vector3.Angle(pathDirection, directionToCheck) != 0.0f) SelectNextWaypoint(FORWARD);
+            else SelectNextWaypoint(REVERSE);
+        }
     }
 
     private void SelectNextWaypoint(bool direction)

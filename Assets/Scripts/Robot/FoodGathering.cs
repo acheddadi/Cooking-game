@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InventoryController))]
 public class FoodGathering : MonoBehaviour
 {
-    [SerializeField] private Transform playerCamera;
-    [SerializeField] private InventoryController inventory;
+    private InventoryController inventory;
+
+    private void Start()
+    {
+        inventory = GetComponent<InventoryController>();
+    }
 
     private void Update()
     {
@@ -15,7 +20,7 @@ public class FoodGathering : MonoBehaviour
     private void GatherFood()
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
         {
             IngredientIdentifier foodToAdd = hitInfo.collider.GetComponentInParent<IngredientIdentifier>();
             if (foodToAdd != null)

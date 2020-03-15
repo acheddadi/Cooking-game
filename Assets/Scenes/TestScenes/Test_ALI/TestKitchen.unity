@@ -1052,8 +1052,8 @@ GameObject:
   - component: {fileID: 1067540315}
   - component: {fileID: 1067540314}
   - component: {fileID: 1067540318}
-  - component: {fileID: 1067540317}
   - component: {fileID: 1067540316}
+  - component: {fileID: 1067540317}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -1110,8 +1110,6 @@ MonoBehaviour:
   firingPower: 40
   foodPrefab: {fileID: 1091043733236919852, guid: 456e5bc1bb3b84741a5b1e35296504e7,
     type: 3}
-  playerCamera: {fileID: 671660050}
-  inventory: {fileID: 1067540318}
 --- !u!114 &1067540317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,8 +1122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9edec2bd171a74491e2e3b00995894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 671660050}
-  inventory: {fileID: 1067540318}
 --- !u!114 &1067540318
 MonoBehaviour:
   m_ObjectHideFlags: 0

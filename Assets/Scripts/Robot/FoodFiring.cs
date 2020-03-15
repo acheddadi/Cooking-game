@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InventoryController))]
 public class FoodFiring : MonoBehaviour
 {
     [SerializeField] private float firingPower = 20.0f;
     [SerializeField] private GameObject foodPrefab;
-    [SerializeField] private Transform playerCamera;
-    [SerializeField] private InventoryController inventory;
+    private InventoryController inventory;
+
+    private void Start()
+    {
+        inventory = GetComponent<InventoryController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -21,11 +26,11 @@ public class FoodFiring : MonoBehaviour
 
         if (foodToFire != TypeOfIngredient.EMPTY)
         {
-            GameObject firedFood = Instantiate(foodPrefab, playerCamera.position + playerCamera.forward * 3.0f, playerCamera.rotation);
+            GameObject firedFood = Instantiate(foodPrefab, Camera.main.transform.position + Camera.main.transform.forward * 3.0f, Camera.main.transform.rotation);
 
             firedFood.GetComponentInChildren<SpriteRenderer>().sprite = FoodSpriteData.GetSprite((int)foodToFire);
             firedFood.GetComponent<IngredientIdentifier>().SetFoodType(foodToFire);
-            firedFood.GetComponent<Rigidbody>().AddForce(playerCamera.forward * firingPower, ForceMode.Impulse);
+            firedFood.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * firingPower, ForceMode.Impulse);
         }
     }
 }
