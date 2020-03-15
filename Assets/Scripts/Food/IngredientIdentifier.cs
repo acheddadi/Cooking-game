@@ -7,6 +7,7 @@ public class IngredientIdentifier : MonoBehaviour
 {
     [SerializeField] private TypeOfIngredient ingredientType = TypeOfIngredient.RICE;
     [SerializeField] private bool ingredientSource = false;
+    private bool onPlate = false;
 
     public TypeOfIngredient GetFoodType()
     {
@@ -21,5 +22,15 @@ public class IngredientIdentifier : MonoBehaviour
     public bool GetSource()
     {
         return ingredientSource;
+    }
+
+    public void SetOnPlate(bool set)
+    {
+        onPlate = set;
+    }
+
+    public bool GetOnPlate()
+    {
+        return onPlate;
     }
 }

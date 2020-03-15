@@ -26,7 +26,6 @@ public class FoodFiring : MonoBehaviour
             firedFood.GetComponentInChildren<SpriteRenderer>().sprite = FoodSpriteData.GetSprite((int)foodToFire);
             firedFood.GetComponent<IngredientIdentifier>().SetFoodType(foodToFire);
             firedFood.GetComponent<Rigidbody>().AddForce(playerCamera.forward * firingPower, ForceMode.Impulse);
-
         }
     }
 }
