@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90fdd813751f7b4bbd0ea5149e210b7, type: 3}
+  m_Name: FoodSprites
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -2546263699789784005, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}
+  - {fileID: -5248869932113712225, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}
+  - {fileID: 4792017602852639660, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}
+  - {fileID: -4024225328451688131, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}
+  - {fileID: 7231599634826122713, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}
+  - {fileID: 6751751811384125958, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}
+  - {fileID: 8104004567680405378, guid: c9dda6907c75dde42bf80e454e3531ec, type: 3}

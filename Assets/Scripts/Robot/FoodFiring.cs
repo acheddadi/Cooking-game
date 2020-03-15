@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodFiring : MonoBehaviour
 {
     [SerializeField] private float firingPower = 20.0f;
-    [SerializeField] private GameObject[] foodPrefabs;
+    [SerializeField] private GameObject foodPrefab;
     [SerializeField] private Transform playerCamera;
     [SerializeField] private InventoryController inventory;
 
@@ -17,18 +17,16 @@ public class FoodFiring : MonoBehaviour
 
     private void FireFood()
     {
-        TypeOfFood foodToFire = inventory.UseFood();
+        TypeOfIngredient foodToFire = inventory.UseFood();
 
-        if ((int)foodToFire < foodPrefabs.Length && foodToFire != TypeOfFood.EMPTY)
+        if (foodToFire != TypeOfIngredient.EMPTY)
         {
-            GameObject firedFood = Instantiate(foodPrefabs[(int)foodToFire], playerCamera.position + playerCamera.forward * 3.0f, playerCamera.rotation);
-            Rigidbody rb = firedFood.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddForce(playerCamera.forward * firingPower, ForceMode.Impulse);
-            }
-            
+            GameObject firedFood = Instantiate(foodPrefab, playerCamera.position + playerCamera.forward * 3.0f, playerCamera.rotation);
+
+            firedFood.GetComponentInChildren<SpriteRenderer>().sprite = FoodSpriteData.GetSprite((int)foodToFire);
+            firedFood.GetComponent<IngredientIdentifier>().SetFoodType(foodToFire);
+            firedFood.GetComponent<Rigidbody>().AddForce(playerCamera.forward * firingPower, ForceMode.Impulse);
+
         }
-        else if (foodToFire != TypeOfFood.EMPTY) Debug.LogError("Food prefab is not set for " + foodToFire + "!");
     }
 }

@@ -6,9 +6,9 @@ public class InventoryController : MonoBehaviour
 {
     
     [SerializeField] private int inventorySize = 3;
-    private List<TypeOfFood> inventory = new List<TypeOfFood>();
+    private List<TypeOfIngredient> inventory = new List<TypeOfIngredient>();
 
-    public bool AddFood(TypeOfFood foodToAdd)
+    public bool AddFood(TypeOfIngredient foodToAdd)
     {
         if (inventory.Count < 3) inventory.Add(foodToAdd);
         else return false;
@@ -16,9 +16,9 @@ public class InventoryController : MonoBehaviour
         return true;
     }
 
-    public TypeOfFood UseFood()
+    public TypeOfIngredient UseFood()
     {
-        TypeOfFood foodToUse = TypeOfFood.EMPTY;
+        TypeOfIngredient foodToUse = TypeOfIngredient.EMPTY;
         if (inventory.Count > 0)
         {
             foodToUse = inventory[0];

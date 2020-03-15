@@ -14,16 +14,13 @@ public class FoodGathering : MonoBehaviour
 
     private void GatherFood()
     {
-        Debug.Log("GatherFood");
         RaycastHit hitInfo;
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo, Mathf.Infinity))
         {
-            FoodIdentifier foodToAdd = hitInfo.collider.GetComponent<FoodIdentifier>();
+            IngredientIdentifier foodToAdd = hitInfo.collider.GetComponentInParent<IngredientIdentifier>();
             if (foodToAdd != null)
             {
-                Debug.Log("Hit food.");
-                if (inventory.AddFood(foodToAdd.GetFoodType())) Destroy(foodToAdd.gameObject);
-                else Debug.Log("Inventory is full!");
+                if (inventory.AddFood(foodToAdd.GetFoodType()) && !foodToAdd.GetSource())Destroy(foodToAdd.gameObject);
             }
         }
     }
